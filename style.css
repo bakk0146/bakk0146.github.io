@@ -3,14 +3,14 @@ body {
     background-image: url(https://images.pexels.com/photos/220182/pexels-photo-220182.jpeg?_gl=1*17zqlkf*_ga*MTE3MTE1OTc4NC4xNzU3MDA4MDI3*_ga_8JE65Q40S6*czE3NTcwMDgwMjYkbzEkZzEkdDE3NTcwMDgxMTEkajQ2JGwwJGgw);
 }
 
-.nav {
+.nav, .aside {
   margin: 0;
   padding: 0;
   display: flex;
   background-color: #2c3e50;
 }
 
-.nav a {
+.nav a, .aside a {
   display: block;
   padding: 14px 20px;
   color: white;
@@ -18,18 +18,175 @@ body {
   transition: background 0.3s ease;
 }
 
-.nav a:hover {
+.nav a:hover, .aside a:hover {
   background-color: #34495e;
 }
 
-.nav a.active {
+.nav a.active, .aside a.active {
   background-color: #1abc9c; /* highlight color */
   font-weight: bold;
 }
 
 /* Inline version */
-.nav li {
+.nav li, .aside li {
   display: inline;
   margin-right: 20px;
 }
 
+.container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  align-items: stretch; /* 👈 makes children equal height */
+  margin-top: 20px;
+}
+
+.tekst {
+  width: 100%;
+  max-width: 500px;
+  background-color: burlywood;
+  padding: 20px;
+}
+
+.gympicca {
+  object-fit: cover;  /* crop if needed */
+  width: 300px;       /* fixed width */
+  height: auto;       /* default */
+  border-radius: 8px;
+}
+
+/* make image stretch to match tekst height */
+.container .gympicca {
+  height: auto; /* fallback */
+  flex: 1;      /* let it stretch */
+}
+
+.post {
+  max-width: 700px;        /* keep content narrow for readability */
+  margin: 40px auto;       /* center horizontally, add space on top/bottom */
+  padding: 20px 30px;
+  background: #fff;        /* white background */
+  border-radius: 8px;      /* rounded corners */
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1); /* subtle shadow */
+  font-family: "Georgia", serif;
+  line-height: 1.7;
+  color: #333;
+}
+
+/* Main title */
+.post h1 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #2c3e50;
+  text-align: center;
+}
+
+/* Subheadings */
+.post h3 {
+  font-size: 1.3rem;
+  margin-top: 2rem;
+  margin-bottom: 0.6rem;
+  color: #34495e;
+}
+
+/* Paragraphs */
+.post p {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  text-align: justify;  /* makes the edges look neat */
+}
+
+.blog {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px 30px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  font-family: "Georgia", serif;
+  line-height: 1.7;
+  color: #333;
+}
+
+.faq, .homepage {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px 30px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  font-family: "Georgia", serif;
+  line-height: 1.7;
+  color: #333;
+}
+
+table {
+  width: 80%;
+  margin: 20px auto;
+  border-collapse: collapse;
+  font-family: Arial, sans-serif;
+  background: #fff;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 12px 15px;
+  text-align: left;
+}
+
+th {
+  background-color: #2c3e50;
+  color: white;
+}
+
+tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+tr:hover {
+  background-color: #f1f1f1;
+}
+
+.progress-bar {
+  position: relative;
+  width: 600px;          /* total width */
+  height: 30px;
+  background: #eee;
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 40px auto;
+}
+
+.fill {
+  height: 100%;
+  background: #2ecc71;   /* green fill */
+  width: 0%;             /* dynamically set via inline style */
+  transition: width 0.3s ease;
+}
+
+.marker {
+  position: absolute;
+  top: -25px;            /* put text above bar */
+  left: 75%;             /* 45/60 = 75% */
+  transform: translateX(-50%);
+  font-size: 14px;
+  color: red;
+  font-weight: bold;
+}
+
+.marker::after {
+  content: "";
+  position: absolute;
+  top: 25px;             /* vertical line inside bar */
+  left: 50%;
+  width: 2px;
+  height: 30px;
+  background: red;
+}
+
+.indicator {
+    margin-left: 56.5%;
+    margin-right: 44.5%;
+    margin-top: -25px;
+}
