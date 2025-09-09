@@ -6,6 +6,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
   <title>Dashboard</title>
 
 </head>
@@ -34,100 +35,238 @@
   </ul>
   </div>
 
-  <table>
-  <thead>
-    <tr>
-      <th>Quarter</th>
-      <th>Course</th>
-      <th>Assessment type</th>
-      <th>Study points (EC)</th>
-      <th>Result</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Business Understanding Basics</td>
-      <td>CU75081V1</td>
-      <td>2025-2026</td>
-      <td>2.5</td>
-    </tr>
-    <tr>
-      <td>Computer Science Basics</td>
-      <td>CU75002V2</td>
-      <td>2025-2026</td>
-      <td>5</td>
-    </tr>
-    <tr>
-      <td>Framework Project 1</td>
-      <td>CU75080V3</td>
-      <td>2025-2026</td>
-      <td>10</td>
-    </tr>
-    <tr>
-      <td>Framework Project 2</td>
-      <td>CU75011V4</td>
-      <td>2025-2026</td>
-      <td>10</td>
-    </tr>
-    <tr>
-      <td>IT Personality 1</td>
-      <td>CU75056V1</td>
-      <td>2025-2026</td>
-      <td>1.25</td>
-    </tr>
-    <tr>
-      <td>IT Personality 2</td>
-      <td>CU75057V1</td>
-      <td>2025-2026</td>
-      <td>1.25</td>
-    </tr>
-    <tr>
-      <td>IT Personality International week</td>
-      <td>CU75055V1</td>
-      <td>2025-2026</td>
-      <td>1.25</td>
-    </tr>
-    <tr>
-      <td>IT Personality Projectweek 1</td>
-      <td>CU75054V1</td>
-      <td>2025-2026</td>
-      <td>1.25</td>
-    </tr>
-    <tr>
-      <td>Object-Oriented Programming</td>
-      <td>CU75004V1</td>
-      <td>2025-2026</td>
-      <td>10</td>
-    </tr>
-    <tr>
-      <td>Personal Professional Development Exploration</td>
-      <td>CU75068V3</td>
-      <td>2025-2026</td>
-      <td>12.5</td>
-    </tr>
-    <tr>
-      <td>Program- &amp; Career Orientation</td>
-      <td>CU75001V3</td>
-      <td>2025-2026</td>
-      <td>2.5</td>
-    </tr>
-    <tr>
-      <td>Programming Basics</td>
-      <td>CU75003V1</td>
-      <td>2025-2026</td>
-      <td>5</td>
-    </tr>
-  </tbody>
-</table>
+<section class="dash">
+  <h2 class="dezemoetzwart">Study Monitor — Year 1</h2>
 
-<div class="progress-bar">
-  <div class="fill" style="width:0%"></div> <!-- Example: 30/60 points = 50% -->
-  <div class="marker">NBSA</div>
-</div>
+  <!-- Completeness meter -->
+  <div class="meter">
+    <div class="meter__fill" style="width: 12.5%"></div> <!-- e.g. 30/60 EC = 50% -->
+    <div class="meter__mark" style="left: 75%"><span>NBSA 45 EC</span></div>
+  </div>
+  <p class="meter__caption"><strong>7.5 / 60 EC</strong> obtained</p>
 
-<div class="indicator">
-    <h3>NBSA</h3>
-</div>
+  <!-- Legend -->
+  <ul class="legend">
+    <li><span class="chip chip--ok"></span> Sufficient (passed)</li>
+    <li><span class="chip chip--bad"></span> Insufficient (failed / resit)</li>
+    <li><span class="chip chip--todo"></span> Not yet</li>
+  </ul>
+
+  <!-- Table version (simple + accessible) -->
+  <table class="tests">
+    <thead>
+      <tr>
+        <th>Quarter</th>
+        <th>Course</th>
+        <th>Assessment Type</th>
+        <th>Weight</th>
+        <th>EC</th>
+        <th>Status</th>
+        <th>Grade</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <!--For status fill in 'badge ok' if completeed, 'badge todo' if not yet, 'badge bad' if failed-->
+
+      <!-- S1 — Program & Career Orientation -->
+      <tr>
+        <td rowspan="1">S1</td>
+        <td rowspan="1">Program & Career Orientation</td>
+        <td>Presentation (individual)</td>
+        <td>100%</td>
+        <td>2.5</td>
+        <td><span class="badge ok">Sufficient</span></td>
+        <td>6.8</td>
+      </tr>
+
+      <!-- S1 — CS Basics -->
+      <tr>
+        <td rowspan="1">S1</td>
+        <td rowspan="1">Computer Science Basics</td>
+        <td>Written knowledge test</td>
+        <td>100%</td>
+        <td>5</td>
+        <td><span class="badge todo">Not yet</span></td>
+        <td>—</td>
+      </tr>
+
+      <!-- S1 — Programming Basics -->
+      <tr>
+        <td rowspan="1">S1</td>
+        <td rowspan="1">Programming Basics</td>
+        <td>Written knowledge test</td>
+        <td>100%</td>
+        <td>5</td>
+        <td><span class="badge bad">Insufficient</span></td>
+        <td>5.0</td>
+      </tr>
+
+      <!-- S1 — OOP -->
+      <tr>
+        <td rowspan="2">S1</td>
+        <td rowspan="2">Object-Oriented Programming</td>
+        <td>Presentation (individual)</td>
+        <td>50%</td>
+        <td rowspan="2">10</td>
+        <td><span class="badge ok">Sufficient</span></td>
+        <td>7.0</td>
+      </tr>
+      <tr>
+        <td>Written knowledge test</td>
+        <td>50%</td>
+        <td><span class="badge todo">Not yet</span></td>
+        <td>—</td>
+      </tr>
+
+      <!-- S1 —  IT Personality Projectweek 1 -->
+      <tr>
+        <td rowspan="1">S1</td>
+        <td rowspan="1">IT Personality Projectweek 1</td>
+        <td>Portfolio</td>
+        <td>100%</td>
+        <td>1.25</td>
+        <td><span class="badge todo">Not yet</span></td>
+        <td>—</td>
+      </tr>
+
+      <!-- S1 —  IT Personality Projectweek 2 -->
+      <tr>
+        <td rowspan="1">S1</td>
+        <td rowspan="1">IT Personality Projectweek 2</td>
+        <td>Portfolio</td>
+        <td>100%</td>
+        <td>1.25</td>
+        <td><span class="badge todo">Not yet</span></td>
+        <td>—</td>
+      </tr>
+
+      <!-- S1/S2 — Personal Professional Development Exploration -->
+      <tr>
+        <td rowspan="1">S1/S2</td>
+        <td rowspan="1">Personal Professional Development Exploration</td>
+        <td>Criterion-referenced interview</td>
+        <td>100%</td>
+        <td>12.5</td>
+        <td><span class="badge todo">Not yet</span></td>
+        <td>—</td>
+      </tr>
+
+       <!-- S1/S2 —  IT Personality 1 -->
+      <tr>
+        <td rowspan="1">S1/S2</td>
+        <td rowspan="1">IT Personality 1</td>
+        <td>Portfolio</td>
+        <td>100%</td>
+        <td>1.25</td>
+        <td><span class="badge todo">Not yet</span></td>
+        <td>—</td>
+      </tr>
+
+      <!-- S1/S2 —  IT Personality 2 -->
+      <tr>
+        <td rowspan="1">S1/S2</td>
+        <td rowspan="1">IT Personality 2</td>
+        <td>Portfolio</td>
+        <td>100%</td>
+        <td>1.25</td>
+        <td><span class="badge todo">Not yet</span></td>
+        <td>—</td>
+      </tr>
+
+      <!-- S1/S2 —  IT Personality 3 -->
+      <tr>
+        <td rowspan="1">S1/S2</td>
+        <td rowspan="1">IT Personality 3</td>
+        <td>Portfolio</td>
+        <td>100%</td>
+        <td>1.25</td>
+        <td><span class="badge todo">Not yet</span></td>
+        <td>—</td>
+      </tr>
+
+      <!-- S1/S2 —  IT Personality 4 -->
+      <tr>
+        <td rowspan="1">S1/S2</td>
+        <td rowspan="1">IT Personality 4</td>
+        <td>Portfolio</td>
+        <td>100%</td>
+        <td>1.25</td>
+        <td><span class="badge todo">Not yet</span></td>
+        <td>—</td>
+      </tr>
+
+      <!-- S2 — Framework Project 1 -->
+      <tr>
+        <td rowspan="3">S2</td>
+        <td rowspan="3">Framework Project 1</td>
+        <td>Presentation (group)</td>
+        <td>25%</td>
+        <td rowspan="3">10</td>
+        <td><span class="badge todo">Not yet</span></td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td>Portfolio</td>
+        <td>25%</td>
+        <td><span class="badge todo">Not yet</span></td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td>Portfolio</td>
+        <td>50%</td>
+        <td><span class="badge todo">Not yet</span></td>
+        <td>—</td>
+      </tr>
+
+        <!-- S2 — Business Understanding Basics -->
+      <tr>
+        <td rowspan="1">S2</td>
+        <td rowspan="1">Business Understanding Basics</td>
+        <td>Assignment (individual) </td>
+        <td>100%</td>
+        <td>2.5</td>
+        <td><span class="badge todo">Not yet</span></td>
+        <td>—</td>
+      </tr>
+
+      <!-- S2 — Framework Project 2 -->
+      <tr>
+        <td rowspan="3">S2</td>
+        <td rowspan="3">Framework Project 2</td>
+        <td>Written knowledge test</td>
+        <td>50%</td>
+        <td rowspan="3">10</td>
+        <td><span class="badge todo">Not yet</span></td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td>Presentation (group)</td>
+        <td>25%</td>
+        <td><span class="badge todo">Not yet</span></td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td>Portfolio</td>
+        <td>25%</td>
+        <td><span class="badge todo">Not yet</span></td>
+        <td>—</td>
+      </tr>
+
+      <!-- S2 —  IT Personality Projectweek 1 -->
+      <tr>
+        <td rowspan="1">S2</td>
+        <td rowspan="1">IT Personality International week</td>
+        <td>Portfolio</td>
+        <td>100%</td>
+        <td>1.25</td>
+        <td><span class="badge todo">Not yet</span></td>
+        <td>—</td>
+      </tr>
+
+    </tbody>
+  </table>
+</section>
 
 </body>
 
