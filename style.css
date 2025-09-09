@@ -1,206 +1,103 @@
-body {
-    font-family: sans-serif;
-    background-image: url(https://static.vecteezy.com/system/resources/previews/008/311/935/non_2x/the-illustration-graphic-consists-of-abstract-background-with-a-blue-gradient-dynamic-shapes-composition-eps10-perfect-for-presentation-background-website-landing-page-wallpaper-vector.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
-  }
-.head-container {
-  background-color: #2c3e50;
-  width: 100%;
+/* Base reset */
+* { box-sizing: border-box; }
+body { margin: 0; font-family: sans-serif; color: #000000; }
+
+/* Background video */
+#bg-video{
+  position: fixed; inset: 0; min-width:100%; min-height:100%;
+  object-fit: cover; z-index: -1; filter: blur(5px);
 }
 
+/* Containers */
+.homepage, .blog, .faq {
+  max-width: 800px; margin: 24px auto; padding: 20px 16px;
+  background:#ffffff; border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,.1);
+  line-height: 1.7; text-align: center;
+}
+
+/* Shared list styles */
 .nav, .aside {
-  text-align: center;
-  margin: 0;
+  list-style: none;
+  margin: 20px auto;
   padding: 0;
   display: flex;
-  justify-self: center;
-  background-color: #2c3e50;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
 }
+
+.nav li, .aside li { margin: 0; }
 
 .nav a, .aside a {
   display: block;
-  padding: 14px 20px;
-  color: white;
+  padding: 10px 20px;
+  background: rgba(255, 255, 255, 0.9); /* light pill */
+  color: #222;                          /* dark text */
   text-decoration: none;
+  border-radius: 999px;                  /* pill shape */
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.25); /* subtle lift */
+}
+
+/* shrink pills on mobile */
+@media (max-width: 600px) {
+  .nav a, .aside a {
+    padding: 8px 14px;   /* less padding */
+    font-size: 0.85rem;  /* smaller text */
+  }
+  .nav, .aside {
+    gap: 8px;            /* tighter spacing */
+  }
 }
 
 .nav a:hover, .aside a:hover {
-  background-color: #34495e;
+  background: #e5e5e5; /* accent */
 }
 
 .nav a.active, .aside a.active {
-  background-color: #1abc9c; /* highlight color */
-  font-weight: bold;
+  background: #b6b5b4; /* highlight for active page */
+  color: #222;
+  font-weight: 700;
 }
 
-/* Inline version */
-.nav li, .aside li {
-  display: inline;
-  margin-right: 20px;
+
+
+/* Headings inside aside */
+.aside h3{ margin: 8px 0; font-size: 1rem; }
+
+/* Progress bar: responsive width */
+.progress-bar{
+  position: relative; width: 100%; max-width: 600px; height: 30px;
+  background:#eee; border-radius:8px; overflow:hidden; margin: 24px auto;
+}
+.fill{ height:100%; background:#2ecc71; width:0%; transition:width .3s; }
+.marker{
+  position:absolute; top:-22px; left:75%; transform:translateX(-50%);
+  font-size:14px; color:red; font-weight:700;
+}
+.marker::after{
+  content:""; position:absolute; top:22px; left:50%; width:2px; height:30px; background:red;
 }
 
-.container {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  align-items: stretch; /* 👈 makes children equal height */
-  margin-top: 20px;
+/* Links color fallback on dark backgrounds */
+a { color:#000000; }
+
+/* Make images and videos fluid */
+img, video { max-width: 100%; height: auto; display:block; }
+
+/* Optional: nicer list inside homepage */
+.reasons { text-align:left; margin: 0 auto; max-width: 540px; }
+
+/* -------- Breakpoints (enhance layout) -------- */
+
+/* Small tablets and up */
+@media (min-width: 600px){
+  .nav, .aside { gap: 12px; }
 }
 
-.tekst {
-  font-family: "Georgia", serif;
-  color: white;
-  width: 100%;
-  max-width: 500px;
-  background-color: #2A293B;
-  padding: 20px;
-}
-
-.gympicca {
-  object-fit: cover;  /* crop if needed */
-  width: 300px;       /* fixed width */
-  height: auto;       /* default */
-  border-radius: 8px;
-}
-
-/* make image stretch to match tekst height */
-.container .gympicca {
-  height: auto; /* fallback */
-  flex: 1;      /* let it stretch */
-}
-
-.post {
-  max-width: 700px;        /* keep content narrow for readability */
-  margin: 40px auto;       /* center horizontally, add space on top/bottom */
-  padding: 20px 30px;
-  background: #fff;        /* white background */
-  border-radius: 8px;      /* rounded corners */
-  box-shadow: 0 4px 20px rgba(0,0,0,0.1); /* subtle shadow */
-  font-family: "Georgia", serif;
-  line-height: 1.7;
-  color: #333;
-}
-
-/* Main title */
-.post h1 {
-  font-size: 2rem;
-  margin-bottom: 1rem;
-  color: #2c3e50;
-  text-align: center;
-}
-
-/* Subheadings */
-.post h3 {
-  font-size: 1.3rem;
-  margin-top: 2rem;
-  margin-bottom: 0.6rem;
-  color: #34495e;
-}
-
-/* Paragraphs */
-.post p {
-  font-size: 1rem;
-  margin-bottom: 1rem;
-  text-align: justify;  /* makes the edges look neat */
-}
-
-.blog {
-  max-width: 800px;
-  margin: 40px auto;
-  padding: 20px 30px;
-  background: #2A293B;
-  border-radius: 8px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-  font-family: "Georgia", serif;
-  line-height: 1.7;
-  color: #ffffff;
-}
-
-.faq, .homepage {
-  max-width: 800px;
-  margin: 40px auto;
-  padding: 20px 30px;
-  background: #2A293B;
-  border-radius: 8px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-  font-family: "Georgia", serif;
-  line-height: 1.7;
-  color: #ffffff;
-  text-align: center;
-}
-
-table {
-  width: 80%;
-  margin: 20px auto;
-  border-collapse: collapse;
-  font-family: Arial, sans-serif;
-  background: #fff;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-}
-
-th, td {
-  border: 1px solid #ddd;
-  padding: 12px 15px;
-  text-align: left;
-}
-
-th {
-  background-color: #2c3e50;
-  color: white;
-}
-
-tr:nth-child(even) {
-  background-color: #f9f9f9;
-}
-
-tr:hover {
-  background-color: #f1f1f1;
-}
-
-.progress-bar {
-  position: relative;
-  width: 600px;          /* total width */
-  height: 30px;
-  background: #eee;
-  border-radius: 8px;
-  overflow: hidden;
-  margin: 40px auto;
-}
-
-.fill {
-  height: 100%;
-  background: #2ecc71;   /* green fill */
-  width: 0%;             /* dynamically set via inline style */
-  transition: width 0.3s ease;
-}
-
-.marker {
-  position: absolute;
-  top: -25px;            /* put text above bar */
-  left: 75%;             /* 45/60 = 75% */
-  transform: translateX(-50%);
-  font-size: 14px;
-  color: red;
-  font-weight: bold;
-}
-
-.marker::after {
-  content: "";
-  position: absolute;
-  top: 25px;             /* vertical line inside bar */
-  left: 50%;
-  width: 2px;
-  height: 30px;
-  background: red;
-}
-
-.indicator {
-    margin-left: 56.5%;
-    margin-right: 44.5%;
-    margin-top: -25px;
-}
-
-a {
-  color: rgb(255, 255, 255);
+/* Tablets / Desktop */
+@media (min-width: 900px){
+  .nav, .aside { justify-content: center; }
 }

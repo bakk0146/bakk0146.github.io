@@ -4,12 +4,17 @@
     
 <head>
   
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="style.css">
   <title>Dashboard</title>
 
 </head>
 
 <body>
+
+  <video autoplay muted loop id="bg-video">
+    <source src="resources/typing.mp4" type="video/mp4">
+  </video>
 
   <div class="head-container">
     <ul class="nav">
@@ -29,13 +34,14 @@
   </ul>
   </div>
 
-  <table border="1" cellpadding="8" cellspacing="0">
+  <table>
   <thead>
     <tr>
+      <th>Quarter</th>
       <th>Course</th>
-      <th>Code</th>
-      <th>Year</th>
+      <th>Assessment type</th>
       <th>Study points (EC)</th>
+      <th>Result</th>
     </tr>
   </thead>
   <tbody>
