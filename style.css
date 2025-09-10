@@ -319,3 +319,10 @@ h2{margin:0 0 10px}
     font-size: 1.2rem;
   }
 }
+
+.hz {
+  width: 300px;      /* adjust size */
+  height: auto;      /* keep aspect ratio */
+  opacity: 0.8;      /* subtle, optional */
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
