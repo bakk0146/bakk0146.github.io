@@ -13,13 +13,6 @@ body { margin: 0; color: #000000; }
   object-fit: cover; z-index: -1; filter: blur(5px);
 }
 
-/* Containers */
-.blog, .faq, .post {
-  max-width: 800px; margin: 24px auto; padding: 20px 16px;
-  background:#ffffff; border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,.1);
-  line-height: 1.7; text-align: center;
-}
-
 /* Shared list styles */
 .nav, .aside {
   list-style: none;
@@ -326,3 +319,78 @@ h2{margin:0 0 10px}
   opacity: 0.8;      /* subtle, optional */
   transition: transform 0.2s ease, opacity 0.2s ease;
 }
+
+/* Reset default markers */
+details { 
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 10px;
+  margin: 12px 0;
+  overflow: hidden;
+  transition: border-color .25s ease, background .25s ease, box-shadow .25s ease;
+}
+details[open] {
+  background: rgba(255,255,255,0.08);
+  box-shadow: 0 8px 24px rgba(0,0,0,.25);
+}
+
+/* Summary (the clickable question) */
+summary {
+  list-style: none;               /* remove default marker */
+  cursor: pointer;
+  padding: 16px 52px 16px 16px;   /* room for chevron on the right */
+  font-weight: 700;
+  color: #f5f7fb;
+  background: #2c3e50;           /* dark blue bar */
+  outline: none;
+  user-select: none;
+  position: relative;
+}
+details:not([open]) summary:hover { background: #34495e; }
+
+/* Accessible focus ring */
+summary:focus-visible {
+  box-shadow: 0 0 0 3px rgba(77,166,255,.45) inset;
+}
+
+/* Custom chevron */
+summary::after {
+  content: "▸";
+  position: absolute;
+  right: 16px; top: 50%;
+  transform: translateY(-50%) rotate(0deg);
+  transition: transform .25s ease;
+  font-size: 1.1rem;
+  color: #cfd8e3;
+}
+details[open] summary::after {
+  transform: translateY(-50%) rotate(90deg);
+}
+
+/* Answer panel */
+.faq-answer {
+  padding: 16px;
+  background: #1b1f2b;
+  color: #dce3ed;
+  line-height: 1.7;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+
+/* Links inside answers */
+.faq-answer a {
+  color: #82c7ff;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: color .2s ease, border-color .2s ease;
+}
+.faq-answer a:hover { 
+  color: #a8d9ff; 
+  border-bottom-color: #a8d9ff;
+}
+
+/* Compact on mobile */
+@media (max-width: 600px) {
+  summary { padding: 14px 48px 14px 14px; }
+  .faq-answer { padding: 14px; }
+}
+
