@@ -2,6 +2,7 @@
 * { box-sizing: border-box; }
 body { margin: 0; color: #000000; }
 
+/* Font */
 * {
   font-family: 'Montserrat', sans-serif;
   font-weight: 700; /* bold */
@@ -13,7 +14,7 @@ body { margin: 0; color: #000000; }
   object-fit: cover; z-index: -1; filter: blur(5px);
 }
 
-/* Shared list styles */
+/* Nav bar */
 .nav, .aside {
   list-style: none;
   margin: 20px auto;
@@ -62,8 +63,6 @@ body { margin: 0; color: #000000; }
   font-weight: 700;
 }
 
-
-
 /* Headings inside aside */
 .aside h3{ margin: 8px 0; font-size: 1rem; }
 
@@ -87,7 +86,7 @@ a { color:#000000; }
 /* Make images and videos fluid */
 img, video { max-width: 100%; height: auto; display:block; }
 
-/* Optional: nicer list inside homepage */
+/* Nicer list inside homepage */
 .reasons { text-align:left; margin: 0 auto; max-width: 540px; }
 
 /* -------- Breakpoints (enhance layout) -------- */
@@ -141,7 +140,7 @@ h2{margin:0 0 10px}
 .chip--bad{background:var(--bad)}
 .chip--todo{background:var(--todo)}
 
-.dezemoetzwart {
+.dezemoetwit {
   color: rgb(255, 255, 255);
 }
 
