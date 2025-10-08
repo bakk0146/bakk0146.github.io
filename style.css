@@ -1,0 +1,767 @@
+/* ========================================================================== */
+/*  - Centralized variables to keep things consistent and tweakable           */
+/* ========================================================================== */
+
+:root {
+  /* Colors */
+  --bg: #10131a;
+  --card: #1b2030;
+  --muted: #aab3c5;
+  --ok: #2ecc71;
+  --bad: #e74c3c;
+  --todo: #f1c40f;
+  --done: #7ed957;
+  --accent: #1abc9c;
+  --nbsa: #ff4d4f;
+
+  --pill-bg: rgba(255, 255, 255, 0.9);
+  --pill-hover: #e5e5e5;
+  --text-dark: #222;
+  --text-light: #e9eef6;
+
+  /* Nav sizes */
+  --nav-pad-y: 10px;
+  --nav-pad-x: 20px;
+  --nav-font: 0.95rem;
+  --nav-gap: 12px;
+
+  /* Mobile nav sizes */
+  --nav-pad-y-sm: 8px;
+  --nav-pad-x-sm: 14px;
+  --nav-font-sm: 0.85rem;
+
+  /* Smaller ASIDE */
+  --aside-pad-y: 6px;
+  --aside-pad-x: 10px;
+  --aside-font: 0.78rem;
+  --aside-gap: 6px;
+  --aside-opacity: 0.85;
+  --aside-shadow: 0 1px 3px rgba(0, 0, 0, 0.18);
+  --aside-text: #2e2e2e;
+
+  /* Layout helpers */
+  --container-max: 1100px;
+
+  /* Hero identity chip sizing */
+  --id-img-size: 72px; /* face size */
+  --id-gap: 12px; /* gap between face and name */
+  --id-top-offset: 18px; /* distance from top edge */
+  --id-name-bg: rgba(0, 0, 0, 0.35); /* pill behind name */
+  --id-name-color: #ffffff; /* name color */
+  --id-name-fs: 1rem; /* name font size */
+  --id-padding-top-extra: calc(
+    var(--id-img-size) + 32px
+  ); /* space to avoid overlap */
+}
+
+/* ========================================================================== */
+/*  RESET / GLOBAL                                                            */
+/* ========================================================================== */
+
+* {
+  box-sizing: border-box;
+}
+html,
+body {
+  margin: 0;
+}
+
+html {
+  font-size: 16px;
+}
+
+/* Single source of truth for font + colors */
+body {
+  font-family: "Montserrat", system-ui, Segoe UI, Roboto, Arial, sans-serif;
+  font-weight: 600;
+  line-height: 1.6;
+  background: var(--bg);
+  color: var(--text-light);
+}
+
+/* Fluid media */
+img,
+video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Link default on dark background */
+a {
+  color: var(--text-light);
+}
+
+/* Background video layer */
+#bg-video {
+  position: fixed;
+  inset: 0;
+  min-width: 100%;
+  min-height: 100%;
+  object-fit: cover;
+  z-index: -1;
+  filter: blur(5px);
+}
+
+/* ========================================================================== */
+/*  NAV & ASIDE (DRY with clear dominance)                                    */
+/* ========================================================================== */
+
+/* Common layout for both lists */
+.navigation-menu,
+.aside-menu {
+  list-style: none;
+  margin: 20px auto;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.navigation-menu li,
+.aside-menu li {
+  margin: 0;
+}
+
+/* Common pill base */
+.navigation-menu a,
+.aside-menu a {
+  display: block;
+  text-decoration: none;
+  border-radius: 999px;
+  transition: all 0.3s ease;
+  font-weight: 600;
+}
+
+/* NAV (more dominant aside menu version) */
+.navigation-menu {
+  gap: var(--nav-gap);
+}
+.navigation-menu a {
+  padding: var(--nav-pad-y) var(--nav-pad-x);
+  font-size: var(--nav-font);
+  background: var(--pill-bg);
+  color: var(--text-dark);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+}
+.navigation-menu a:hover {
+  background: var(--pill-hover);
+}
+.navigation-menu a.active {
+  background: #b6b5b4;
+  color: var(--text-dark);
+  font-weight: 700;
+}
+
+/* ASIDE (significantly smaller + lighter) */
+.aside-menu {
+  gap: var(--aside-gap);
+}
+.aside-menu a {
+  padding: var(--aside-pad-y) var(--aside-pad-x);
+  font-size: var(--aside-font);
+  background: rgba(255, 255, 255, var(--aside-opacity));
+  color: var(--aside-text);
+  box-shadow: var(--aside-shadow);
+  opacity: 0.95;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  letter-spacing: 0.1px;
+}
+.aside-menu a:hover {
+  background: rgba(229, 229, 229, var(--aside-opacity));
+}
+.aside-menu a.active {
+  background: rgba(182, 181, 180, var(--aside-opacity));
+  color: var(--aside-text);
+  font-weight: 700;
+}
+.aside-menu h3 {
+  margin: 6px 0;
+  font-size: 0.95rem;
+}
+
+/* Mobile nav sizing */
+@media (max-width: 600px) {
+  .navigation-menu {
+    gap: 8px;
+  }
+  .navigation-menu a {
+    padding: var(--nav-pad-y-sm) var(--nav-pad-x-sm);
+    font-size: var(--nav-font-sm);
+  }
+  /* Aside already clearly smaller */
+}
+
+/* ========================================================================== */
+/*  LEGACY PROGRESS BAR                                                       */
+/* ========================================================================== */
+
+.progress-bar {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  height: 30px;
+  background: #eee;
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 24px auto;
+}
+.fill {
+  height: 100%;
+  background: #2ecc71;
+  width: 0%;
+  transition: width 0.3s;
+}
+.marker {
+  position: absolute;
+  top: -22px;
+  left: 75%;
+  transform: translateX(-50%);
+  font-size: 14px;
+  color: red;
+  font-weight: 700;
+}
+.marker::after {
+  content: "";
+  position: absolute;
+  top: 22px;
+  left: 50%;
+  width: 2px;
+  height: 30px;
+  background: red;
+}
+
+/* ========================================================================== */
+/*  DASHBOARD BITS                                                            */
+/* ========================================================================== */
+
+.dash {
+  max-width: var(--container-max);
+  margin: 24px auto;
+  padding: 20px 16px;
+}
+h2 {
+  margin: 0 0 10px;
+}
+
+/* Completeness meter */
+.meter {
+  position: relative;
+  height: 16px;
+  background: #2a3145;
+  border-radius: 999px;
+  overflow: hidden;
+}
+.meter__fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), #34d399);
+  width: 0%;
+  transition: width 0.4s;
+}
+.meter__mark {
+  position: absolute;
+  top: -32px;
+  transform: translateX(-50%);
+}
+.meter__mark::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 22px;
+  width: 2px;
+  height: 26px;
+  background: var(--nbsa);
+}
+.meter__mark span {
+  background: #2b3247;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+.meter__caption {
+  color: var(--muted);
+  margin: 0.5rem 0 1rem;
+}
+
+/* Legend */
+.legend {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 0;
+  margin: 10px 0 18px;
+}
+.legend li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #cbd5e1;
+}
+.chip {
+  width: 14px;
+  height: 14px;
+  border-radius: 999px;
+  display: inline-block;
+}
+.chip--ok {
+  background: var(--ok);
+}
+.chip--bad {
+  background: var(--bad);
+}
+.chip--todo {
+  background: var(--todo);
+}
+
+.dashboard-title {
+  color: #fff;
+}
+
+/* ========================================================================== */
+/*  TABLE                                                                     */
+/* ========================================================================== */
+
+.tests {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--card);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  text-align: left; /* all text aligned left by default */
+}
+
+/* Header cells */
+.tests thead th {
+  text-align: left;
+  background: #22283b;
+  color: var(--text-light);
+  padding: 12px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Table data cells */
+.tests td {
+  padding: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  color: #e5ecf7;
+  text-align: left; /* ensure left alignment everywhere */
+}
+
+/* Row hover effect */
+.tests tr:hover {
+  background: #20263a;
+}
+
+/* Emphasize course name cells */
+.tests tr.course td:first-child,
+.tests tr.course td:nth-child(2) {
+  font-weight: 600;
+}
+
+/* Status badges */
+.badge {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #0b1220;
+  background: #cbd5e1;
+}
+
+.badge.ok {
+  background: var(--ok);
+  color: #06210e;
+}
+
+.badge.bad {
+  background: var(--bad);
+  color: #2a0b0b;
+}
+
+.badge.todo {
+  background: var(--todo);
+  color: #231a05;
+}
+
+.badge.done {
+  background: var(--done);
+  color: #0e1f0c;
+}
+
+/* Completed course rows */
+.tests tr.done {
+  background: rgba(46, 204, 113, 0.12);
+}
+
+.tests tr.done td {
+  color: #d2ffe6;
+}
+
+/* Responsive mode — stack into cards on small screens */
+@media (max-width: 720px) {
+  .tests thead {
+    display: none;
+  }
+
+  .tests,
+  .tests tbody,
+  .tests tr,
+  .tests td {
+    display: block;
+    width: 100%;
+    text-align: left; /* ensure all mobile text aligns left */
+  }
+
+  .tests tr {
+    margin: 0 0 12px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .tests td {
+    border: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    display: flex;
+    flex-direction: column; /* stack label + value vertically */
+    align-items: flex-start; /* left align text inside */
+    gap: 4px;
+    padding: 10px 12px;
+  }
+
+  .tests td::before {
+    content: attr(data-label);
+    color: var(--muted);
+    font-weight: 600;
+    text-align: left; /* ensure labels align left */
+  }
+}
+
+/* Title row with identity on the right */
+.dash-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin: 0 0 10px; /* keep your original spacing under the title row */
+}
+
+.dashboard-title {
+  color: #fff;
+  margin: 0; /* remove default h2 top spacing so it aligns better */
+  line-height: 1.2;
+}
+
+/* Compact identity chip (avatar + name) */
+.id-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 6px 10px;
+  border-radius: 999px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+}
+
+.id-chip img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+}
+
+.id-chip span {
+  color: #e9eef6;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.2px;
+  white-space: nowrap;
+}
+
+/* Stack on small screens */
+@media (max-width: 560px) {
+  .dash-header {
+    flex-direction: column;
+    align-items: flex-start; /* title and chip align left */
+    gap: 8px;
+  }
+}
+
+/* ========================================================================== */
+/*  HERO + Identity (image + name side-by-side, above title)                  */
+/*  - Uses ::before (image) and ::after (name) to avoid HTML changes          */
+/*  - Centered at the top; hero gets extra top padding to make room           */
+/* ========================================================================== */
+
+.hero {
+  position: relative;
+  max-width: 900px;
+  margin: 60px auto;
+  padding: calc(40px + var(--id-padding-top-extra)) 40px 40px;
+  background: rgba(15, 20, 30, 0.85);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(12px);
+  color: #f5f5f5;
+  line-height: 1.8;
+  animation: fadeIn 1.2s ease-out;
+}
+
+/* --- tweak spacing variables (optional override) --- */
+:root {
+  /* more separation between face and name */
+  --id-gap: 25px;
+  /* less extra padding above the title */
+  --id-padding-top-extra: calc(var(--id-img-size) + 16px);
+}
+
+/* Identity: face (left of the pair) */
+.hero::before {
+  content: "";
+  position: absolute;
+  top: var(--id-top-offset);
+  left: 50%;
+  width: var(--id-img-size);
+  height: var(--id-img-size);
+  /* use full gap instead of half for clearer separation */
+  transform: translateX(calc(-50% - (var(--id-img-size) / 2) - var(--id-gap)));
+  background: url("resources/photo-of-myself.png") center/cover no-repeat;
+  border-radius: 999px; /* round image */
+  border: 3px solid rgba(255, 255, 255, 0.55); /* subtle ring */
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+  overflow: hidden;
+}
+
+/* Identity: name (right of the pair) */
+.hero::after {
+  content: "Vince Bakker";
+  position: absolute;
+  /* keep vertical alignment to avatar center */
+  top: calc(var(--id-top-offset) + (var(--id-img-size) / 2) - 18px);
+  left: 50%;
+  /* use full gap instead of half for clearer separation */
+  transform: translateX(calc(-50% + (var(--id-img-size) / 2) + var(--id-gap)));
+  background: var(--id-name-bg);
+  color: var(--id-name-color);
+  font-size: var(--id-name-fs);
+  font-weight: 800;
+  letter-spacing: 0.3px;
+  padding: 8px 12px;
+  border-radius: 999px; /* pill */
+  line-height: 1;
+  white-space: nowrap;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(2px);
+}
+
+/* Reduce the extra top padding so the H1 sits closer to the identity row */
+.hero {
+  padding-top: calc(0px + var(--id-padding-top-extra));
+}
+
+/* Heading */
+.hero h1 {
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #ffffff;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+  padding-bottom: 10px;
+}
+
+/* Paragraphs */
+.hero p {
+  font-size: 1.05rem;
+  margin-bottom: 1.2rem;
+  color: #e0e6ef;
+  text-align: justify;
+}
+
+/* Links */
+.hero a {
+  color: #4da6ff;
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: all 0.3s ease;
+}
+.hero a:hover {
+  color: #82c7ff;
+  border-bottom: 1px solid #82c7ff;
+}
+
+/* Subheading */
+.hero h3 {
+  font-size: 1.4rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  color: #dbe4f0;
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+/* Reasons list */
+.reasons {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto 2rem;
+  max-width: 600px;
+  text-align: left;
+}
+.reasons li {
+  background: rgba(255, 255, 255, 0.05);
+  margin: 8px 0;
+  padding: 12px 18px;
+  border-radius: 8px;
+  font-size: 1rem;
+  color: #f0f4fa;
+  transition: transform 0.2s ease, background 0.3s ease;
+}
+.reasons li:hover {
+  background: rgba(255, 255, 255, 0.12);
+  transform: translateX(6px);
+}
+
+/* Images in hero content (not the identity image) */
+.hero figure {
+  margin: 20px auto;
+  max-width: 500px;
+  text-align: center;
+}
+.hero img {
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+  transition: transform 0.4s ease;
+}
+.hero img:hover {
+  transform: scale(1.03);
+}
+.hero figcaption {
+  margin-top: 8px;
+  font-size: 0.9rem;
+  color: #b5c0cc;
+  font-style: italic;
+}
+
+/* Identity responsiveness (smaller phones) */
+@media (max-width: 480px) {
+  :root {
+    --id-img-size: 64px;
+    --id-name-fs: 0.95rem;
+    --id-gap: 10px;
+  }
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ========================================================================== */
+/*  FAQ (details/summary)                                                     */
+/* ========================================================================== */
+
+details {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 10px;
+  margin: 12px 0;
+  overflow: hidden;
+  transition: border-color 0.25s ease, background 0.25s ease,
+    box-shadow 0.25s ease;
+}
+details[open] {
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+}
+
+summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 16px 52px 16px 16px;
+  font-weight: 700;
+  color: #f5f7fb;
+  background: #2c3e50;
+  outline: none;
+  user-select: none;
+  position: relative;
+}
+details:not([open]) summary:hover {
+  background: #34495e;
+}
+summary:focus-visible {
+  box-shadow: 0 0 0 3px rgba(77, 166, 255, 0.45) inset;
+}
+summary::after {
+  content: "▸";
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%) rotate(0deg);
+  transition: transform 0.25s ease;
+  font-size: 1.1rem;
+  color: #cfd8e3;
+}
+details[open] summary::after {
+  transform: translateY(-50%) rotate(90deg);
+}
+
+.faq-answer {
+  padding: 16px;
+  background: #1b1f2b;
+  color: #dce3ed;
+  line-height: 1.7;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+.faq-answer a {
+  color: #82c7ff;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+.faq-answer a:hover {
+  color: #a8d9ff;
+  border-bottom-color: #a8d9ff;
+}
+
+@media (max-width: 600px) {
+  summary {
+    padding: 14px 48px 14px 14px;
+  }
+  .faq-answer {
+    padding: 14px;
+  }
+}
+
+/* ========================================================================== */
+/*  Misc                                                                      */
+/* ========================================================================== */
+
+.hz {
+  width: 300px;
+  height: auto;
+  opacity: 0.8;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
